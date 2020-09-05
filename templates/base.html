@@ -37,7 +37,7 @@
 
         <div class="pull-right right-div">
             <h4> username: {{ request.user.username }} </h4>
-            <a href="#" class="btn btn-danger">Выход</a>
+            <a href="{% url 'meeting:logout' %}" class="btn btn-danger">Выход</a>
         </div>
 
     </div>

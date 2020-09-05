@@ -13,6 +13,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     level = models.CharField(max_length=255, choices=LEVEL)
 
+    def __str__(self):
+        return self.user.username
+
 
 class StudentGroup(models.Model):
     students = models.ManyToManyField(Profile)
@@ -21,7 +24,7 @@ class StudentGroup(models.Model):
 
 
 class TeacherInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
     subject = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
 
