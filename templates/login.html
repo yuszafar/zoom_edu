@@ -1,0 +1,69 @@
+
+{% load static %}
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fonts -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+    <title>Laravel</title>
+</head>
+<body>
+
+
+<div class="container login-container">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6 login-form-1">
+            <h3>Авторизация</h3>
+            {% if form.errors %}
+                <div class="text-danger">
+                    <p>Введен неверный логин или пароль</p>
+                </div>
+            {% endif %}
+            <form action="{% url 'stream:login' %}" method="post">
+                {% csrf_token %}
+                {% if form.username.errors %}
+                    <div class="text-danger">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <input name="{{ form.username.name }}" type="text" class="form-control" placeholder="Логин"
+                           value="{% if form.username.value %}{{ form.username.value }}{% endif %}">
+                </div>
+
+                {% if form.pwd.errors %}
+                    <div class="text-danger">
+                        {{ form.pwd.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <input name="{{ form.password.name }}" type="password" class="form-control" placeholder="Пароль">
+                </div>
+
+                <div class="center-block">
+                    <button type="submit" class="btn btn-primary">Вход</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
