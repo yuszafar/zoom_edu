@@ -27,6 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 30
+
+}
 
 # Application definition
 
@@ -38,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'meeting',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +68,7 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': ['templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,7 +91,7 @@ WSGI_APPLICATION = 'wsgi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
