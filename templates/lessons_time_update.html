@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class="row">
+        {% for time in lessontime_list %}
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading text-center">
+                        {{ time.number }} пара
+                    </div>
+                    <div class="panel-body">
+
+                            <div class="form-group">
+                                <label>Начала</label>
+                                <input id="time_start_{{ time.id }}" class="form-control" type="time" value="{{ time.start.isoformat }}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Конец</label>
+                                <input id="time_end_{{ time.id }}" class="form-control" type="time" value="{{ time.end.isoformat }}"/>
+                            </div>
+
+                        <button id="update_time_{{ time.id }}" class="btn btn-info" onclick="put({{ time.id }})" data-url="{% url 'api_v1:lesson_time' time.id %}">Обновить</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+
+        function put(id) {
+
+            let formData = new FormData();
+            formData.append('start', document.getElementById("time_start_" + id).value);
+            formData.append('end', document.getElementById("time_end_" + id).value);
+            var url = $("#update_time_"+ id).data("url");
+
+            $.ajax({
+                    headers: { "X-CSRFToken": "{{csrf_token}}" },
+                    url: url,
+                    processData: false,
+                    contentType: false,
+                    method: 'PUT',
+                    data: formData,
+                    success: function (data) {
+                        alert('успех!');
+                    },
+                    error: function (data) {
+                        alert('Ошибка');
+                    }
+                });
+        }
+    </script>
+{% endblock %}
