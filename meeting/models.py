@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+
 # Create your models here.
 
 
@@ -34,6 +36,7 @@ class TeacherInfo(models.Model):
 
 class LessonType(models.Model):
     name = models.CharField(max_length=255)
+
     def __str__(self):
         return self.name
 
@@ -42,6 +45,9 @@ class LessonTime(models.Model):
     number = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(1)], unique=True)
     start = models.TimeField()
     end = models.TimeField()
+
+    def __str__(self):
+        return "%s %s " % (self.number, "пара")
 
 
 class LessonInfo(models.Model):
