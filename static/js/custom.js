@@ -28,6 +28,12 @@
 
                 }
             );
+            $('#lesson_info_table').dataTable(
+                {
+                     ordering: true,
+
+                }
+            );
 
         },
        
