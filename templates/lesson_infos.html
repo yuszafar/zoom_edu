@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for lesson in lessoninfo_list %}
+        Дисуиплина: {{ lesson.name }}({{ lesson.type }})
+        ФИО Преподавателя: {{ lesson.teacher.first_name }}{{ lesson.teacher.last_name }}{{ lesson.teacher.otchestvo }}
+
+
+    {% endfor %}
+
+
+{% endblock %}

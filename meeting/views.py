@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import LessonTime
+from .models import LessonTime, LessonInfo
 
 
 class IndexView(LoginRequiredMixin, generic.TemplateView):
@@ -24,5 +24,11 @@ class LessonsTimeUpdateView(generic.ListView):
     model = LessonTime
     ordering = "number"
 
+
 class CreatUserView(generic.TemplateView):
     template_name = 'crate_user.html'
+
+
+class LessonInfoListView(generic.ListView):
+    template_name = 'lesson_infos.html'
+    model = LessonInfo
