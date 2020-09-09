@@ -23,3 +23,6 @@ class LessonsTimeUpdateView(generic.ListView):
     template_name = 'lessons_time_update.html'
     model = LessonTime
     ordering = "number"
+
+class CreatUserView(generic.TemplateView):
+    template_name = 'crate_user.html'

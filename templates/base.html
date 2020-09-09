@@ -56,7 +56,7 @@
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li><a id="nav-stream" href="{% url "meeting:calendar" %}" class="">Расписание</a></li>
                         <li><a id="nav-subs" href="{% url "meeting:time" %}">Время занятий</a></li>
-                        <li><a id="nav-mystreams" href="#">Мои конференции</a></li>
+                        <li><a id="nav-mystreams" href="{% url "meeting:create_user" %}">Добавить пользователя</a></li>
 
                         <li><a id="nav-create" href="#">Создать</a></li>
 

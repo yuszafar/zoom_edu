@@ -11,6 +11,9 @@ class Profile(models.Model):
         ("Training_division", "Учебный отдел")
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=255, null=True)
+    last_name = models.CharField(max_length=255, null=True)
+    otchestvo = models.CharField(max_length=255, null=True)
     level = models.CharField(max_length=255, choices=LEVEL)
 
     def __str__(self):
@@ -44,7 +47,10 @@ class LessonTime(models.Model):
 class LessonInfo(models.Model):
     name = models.CharField(max_length=255)
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(TeacherInfo, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Profile, on_delete=models.CASCADE, limit_choices_to={'level': "Teacher"})
+
+    def __str__(self):
+        return self.name
 
 
 class Lesson(models.Model):
