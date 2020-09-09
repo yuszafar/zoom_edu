@@ -1,10 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+     <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                    Добавить Дисциплину
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">Наименование предмета</label>
+                        <input id="name" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Тип</label>
+                        <select class="form-control" id="type">
+                            {% for type in type_list %}
+                                 <option value="{{ type.id }}">{{type.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher">Преподаватель</label>
+                        <select class="form-control" id="teacher">
+                             {% for teacher in teacher_list %}
+                                 <option value="{{ teacher.id }}">{{teacher.first_name}} {{ teacher.last_name }}  {{ teacher.otchestvo }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <button id="create_btn" class="btn btn-info" onclick="create_lesson_info()" data-url="{% url 'api_v1:create_lesson_info' %}">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function create_lesson_info() {
+
+            let formData = new FormData();
+            formData.append('name', document.getElementById("name").value);
+            formData.append('type', document.getElementById("type").value);
+            formData.append('teacher', document.getElementById("teacher").value);
+
+            var url = $("#create_btn").data("url");
+
+            $.ajax({
+                    headers: { "X-CSRFToken": "{{csrf_token}}" },
+                    url: url,
+                    processData: false,
+                    contentType: false,
+                    method: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        alert('успех!');
+                    },
+                    error: function (data) {
+                        alert('Ошибка');
+                    }
+                });
+        }
+    </script>
+{% endblock %}

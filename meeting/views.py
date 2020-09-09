@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import LessonTime, LessonInfo
+from .models import LessonTime, LessonInfo, Profile, LessonType
 
 
 class IndexView(LoginRequiredMixin, generic.TemplateView):
@@ -32,3 +32,12 @@ class CreatUserView(generic.TemplateView):
 class LessonInfoListView(generic.ListView):
     template_name = 'lesson_infos.html'
     model = LessonInfo
+
+class LessonInfoCreateVirew(generic.TemplateView):
+    template_name = 'create_lesson_info.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["teacher_list"] = Profile.objects.filter(level="Teacher")
+        context["type_list"] = LessonType.objects.all()
+        return context

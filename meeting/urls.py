@@ -9,7 +9,8 @@ urlpatterns = [
     path('time/', views.LessonsTimeView.as_view(), name='time'),
     path('time/update/', views.LessonsTimeUpdateView.as_view(), name='time_update'),
     path('create_user/', views.CreatUserView.as_view(), name='create_user'),
-    path('lessons/', views.LessonInfoListView.as_view(), name='lesson_info'),
+    path('lesson_info/', views.LessonInfoListView.as_view(), name='lesson_info'),
+    path('lesson_info/create/', views.LessonInfoCreateVirew.as_view(), name='lesson_info_create'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
 ]

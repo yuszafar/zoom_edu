@@ -1,12 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for lesson in lessoninfo_list %}
-        Дисуиплина: {{ lesson.name }}({{ lesson.type }})
-        ФИО Преподавателя: {{ lesson.teacher.first_name }}{{ lesson.teacher.last_name }}{{ lesson.teacher.otchestvo }}
+
+        <div class="row">
+        <div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Advanced Tables
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+
+                            <thead>
+
+                            <tr>
+                                <th class="text-center">№</th>
+                                <th class="text-center">Дисциплина</th>
+                                <th class="text-center">ФИО Преподавателя</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for lesson in lessoninfo_list %}
+                                <tr class="odd gradeX">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ lesson.name }}({{ lesson.type }})</td>
+                                    <td>{{ lesson.teacher.last_name }} {{ lesson.teacher.first_name }} {{ lesson.teacher.otchestvo }}</td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <!--End Advanced Tables -->
+        </div>
+
+    </div>
 
 
-    {% endfor %}
+
 
 
 {% endblock %}
