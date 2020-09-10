@@ -2,16 +2,18 @@
 
 {% block content %}
 
-        <div class="row">
-         <div class="col-md-12">
-        <div class="right-div">
-        <a class="btn btn-success" href="{% url 'meeting:lesson_info_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="right-div">
+                <a class="btn btn-success" href="{% url 'meeting:create_user' %}"> <i
+                        class="fa fa-plus "></i>Добавить</a>
             </div>
+        </div>
         <div class="col-md-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Дисчеплины
+                    Список пользователей
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -21,17 +23,19 @@
 
                             <tr>
                                 <th class="text-center">№</th>
-                                <th class="text-center">Дисциплина</th>
-                                <th class="text-center">ФИО Преподавателя</th>
+                                <th class="text-center">Логин</th>
+                                <th class="text-center">ФИО</th>
+                                <th class="text-center">Роль</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for lesson in lessoninfo_list %}
+                            {% for profile in profile_list %}
                                 <tr class="odd gradeX">
                                     <td>{{ forloop.counter }}</td>
-                                    <td>{{ lesson.name }}({{ lesson.type }})</td>
-                                    <td>{{ lesson.teacher.last_name }} {{ lesson.teacher.first_name }} {{ lesson.teacher.otchestvo }}</td>
+                                    <td>{{ profile.user.username }}</td>
+                                    <td>{{ profile.last_name }} {{ profile.first_name }} {{ profile.otchestvo }}</td>
+                                    <td>{{ profile.get_level_display }}</td>
 
                                 </tr>
                             {% endfor %}
@@ -46,7 +50,6 @@
         </div>
 
     </div>
-        </div>
 
 
 

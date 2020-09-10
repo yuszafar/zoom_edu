@@ -33,6 +33,7 @@ class LessonInfoListView(generic.ListView):
     template_name = 'lesson_infos.html'
     model = LessonInfo
 
+
 class LessonInfoCreateVirew(generic.TemplateView):
     template_name = 'create_lesson_info.html'
 
@@ -41,3 +42,8 @@ class LessonInfoCreateVirew(generic.TemplateView):
         context["teacher_list"] = Profile.objects.filter(level="Teacher")
         context["type_list"] = LessonType.objects.all()
         return context
+
+
+class ProfileListView(generic.ListView):
+    model = Profile
+    template_name = 'profiles.html'
