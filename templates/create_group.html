@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                    Добавить пользователя
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="group_name">Наименование группы</label>
+                        <input id="group_name" class="form-control" type="text" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label for="students">Multiple Select Example</label>
+                        <select multiple id="students" class="form-control">
+                            {% for student in student_list %}
+                                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button id="create_btn" class="btn btn-info" onclick="create_group()"
+                            data-url="{% url 'api_v1:create_group' %}">Добавить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function create_group() {
+
+            let formData = new FormData();
+            formData.append('group_name', document.getElementById("group_name").value);
+            {#formData.append('students', document.getElementById("students").value);#}
+            for (i = 0; i < $("#students").val().length; i++) {
+                formData.append('students', $("#students").val()[i]);
+            }
+            var url = $("#create_btn").data("url");
+
+            $.ajax({
+                headers: {"X-CSRFToken": "{{csrf_token}}"},
+                url: url,
+                processData: false,
+                contentType: false,
+                method: 'POST',
+                data: formData,
+                success: function (data) {
+                    alert('успех!');
+                },
+                error: function (data) {
+                    alert('Ошибка');
+                }
+            });
+        }
+    </script>
+
+{% endblock %}

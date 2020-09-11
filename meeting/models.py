@@ -23,9 +23,11 @@ class Profile(models.Model):
 
 
 class StudentGroup(models.Model):
-    students = models.ManyToManyField(Profile)
+    students = models.ManyToManyField(Profile, limit_choices_to={'level': "Student"})
     group_name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.group_name
 
 
 class TeacherInfo(models.Model):

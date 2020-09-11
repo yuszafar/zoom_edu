@@ -13,7 +13,6 @@ class ProfileSerializer(ModelSerializer):
         fields = ['username', 'password', 'first_name', 'last_name', 'otchestvo', 'level']
 
     def create(self, validated_data):
-        print(validated_data['user'])
         user = get_user_model().objects.create(username=validated_data['user']['username'])
         user.set_password(validated_data['user']['password'])
 

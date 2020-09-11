@@ -53,36 +53,14 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="navbar-collapse collapse ">
-                    <ul id="menu-top" class="nav navbar-nav navbar-left">
-                        <li><a id="" href="" class="" data-toggle="modal" data-target="#exampleModalLong">#МамонВор</a></li>
 
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">$$$</h5>
-
-      </div>
-      <div class="modal-body">
-          <p>Любая Бизнес Хороша</p>
-          <p>В каждом туалете будет туалетная бумана!</p>
-          <p>Я все делаю для Вас!</p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-                    </ul>
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li><a id="nav-stream" href="{% url "meeting:calendar" %}" class="">Расписание</a></li>
                         <li><a id="nav-subs" href="{% url "meeting:time" %}">Время занятий</a></li>
                         <li><a id="nav-mystreams" href="{% url "meeting:user_list" %}">пользователи</a></li>
 
                         <li><a id="nav-create" href="{% url 'meeting:lesson_info' %}">Дисциплины</a></li>
+                        <li><a id="nav-create" href="{% url 'meeting:group_list' %}">Группы</a></li>
 
                     </ul>
                 </div>
