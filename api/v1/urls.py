@@ -1,7 +1,7 @@
 from django.urls import path
 from .lessons_time import views
 from .profile.views import CreateProfileApiView
-from .lessons.views import LessonInfoCreateApiView, LessonCreateApiView
+from .lessons.views import LessonInfoCreateApiView, LessonCreateApiView, LessonsCalendarListApiView
 from .student_group.views import CreateGroupApiView
 app_name = 'api_v1'
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('lessons/info/create/', LessonInfoCreateApiView.as_view(), name='create_lesson_info'),
     path('lessons/create/', LessonCreateApiView.as_view(), name='create_lesson'),
     path('group/create/', CreateGroupApiView.as_view(), name='create_group'),
+    path('lessons/calendar/list/<int:id>', LessonsCalendarListApiView.as_view(), name='lesson_list_calendar'),
 ]

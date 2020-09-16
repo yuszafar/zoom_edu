@@ -9,14 +9,26 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'base.html'
 
 
-class CalendarView(generic.TemplateView):
-    template_name = 'calendar_week.html'
+class CalendarListView(generic.ListView):
+    template_name = 'calendar_list.html'
+    model = StudentGroup
+
+
+class CalendarDetailView(generic.DeleteView):
+    template_name = 'calendar_detail.html'
+    model = StudentGroup
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["lesson_info_list"] = LessonInfo.objects.all()
+        context["lesson_time_list"] = LessonTime.objects.all()
+        return context
 
 
 class LessonsTimeView(generic.ListView):
     template_name = 'lessons_time.html'
     model = LessonTime
     ordering = "number"
+
 
 
 class LessonsTimeUpdateView(generic.ListView):
@@ -50,7 +62,7 @@ class ProfileListView(generic.ListView):
 
 
 class GroupListView(generic.ListView):
-    template_name = 'groups.html'
+    template_name = 'group_list.html'
     model = StudentGroup
 
 
