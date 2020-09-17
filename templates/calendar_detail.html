@@ -27,8 +27,12 @@
                 dateClick: function (info) {
                     {#alert('Clicked on: ' + info.dateStr);#}
 
-                    $.getJSON(url, {day: info.dateStr}, function (data, textStatus, jqXHR){
-                        alert('status: ' + textStatus + ', data:' + data[0].start);
+                    $.getJSON(url, {day: info.dateStr}, function (data, textStatus, jqXHR) {
+                        {#alert('status: ' + textStatus + ', data:' + data[0].start);#}
+                        for (key in data) {
+                            $('#' + data[key].less_numb).val(data[key].less_info_id);
+                            $('#delete_les_' + data[key].less_numb).val(data[key].less_info_id);
+                        }
                     });
                     selected_date = info.dateStr
                     dialog.dialog("open");
@@ -65,10 +69,29 @@
 
                 lessons_form = document.getElementById("lessons_form").elements;
                 for (i = 1; i < lessons_form.length; i++) {
+
+                    let formData = new FormData();
+                    if (document.getElementById("delete_les_" + lessons_form[i].id).value !== "" && lessons_form[i].value === "") {
+                        var delete_url = "api/v1/lessons/delete/" + document.getElementById("delete_les_" + lessons_form[i].id).value
+                        print(delete_url)
+                        $.ajax({
+                            headers: {"X-CSRFToken": "{{csrf_token}}"},
+                            url: delete_url,
+                            processData: false,
+                            contentType: false,
+                            method: 'DELETE',
+                            success: function (data) {
+                                alert('успех! 22');
+                            },
+                            error: function (data) {
+                                alert('Ошибка 22');
+                            }
+                        });
+                    }
                     if (lessons_form[i].value !== "") {
-                        let formData = new FormData();
-                        formData.append('day', selected_date);
+                        alert(lessons_form[i].value)
                         formData.append('lesson_info', lessons_form[i].value);
+                        formData.append('day', selected_date);
                         formData.append('lesson_time', lessons_form[i].id);
                         formData.append('group', "{{studentgroup.id}}");
                         var url = "{% url 'api_v1:create_lesson' %}";
@@ -87,9 +110,8 @@
                                 alert('Ошибка');
                             }
                         });
-
-
                     }
+
 
                 }
 
@@ -132,7 +154,7 @@
                     <div class="form-group">
                         <label for="{{ lesson_time.number }}">{{ lesson_time.number }} Пара </label>
                         <select class="form-control" id="{{ lesson_time.number }}">
-                            <option></option>
+                            <option id="delete_les_{{ lesson_time.number }}" value=""></option>
                             {% for lesson_info in lesson_info_list %}
                                 <option value="{{ lesson_info.id }}">{{ lesson_info.name }}</option>
                             {% endfor %}

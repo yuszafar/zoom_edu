@@ -66,7 +66,7 @@ class Lesson(models.Model):
     day = models.DateField()
     lesson_info = models.ForeignKey(LessonInfo, on_delete=models.CASCADE)
     zum_url = models.URLField(null=True, blank=True)
-    group = models.ManyToManyField(StudentGroup)
+    group = models.ForeignKey(StudentGroup, on_delete=models.CASCADE, null=True)
     lesson_time = models.ForeignKey(LessonTime, on_delete=models.CASCADE)
 
     def get_start_datetime(self):
@@ -80,3 +80,9 @@ class Lesson(models.Model):
 
     def get_url(self):
         return 'http://google.com'
+
+    def get_less_time_number(self):
+        return self.lesson_time.number
+
+    def get_les_info_id(self):
+        return self.lesson_info.id
