@@ -17,9 +17,8 @@ class LessonCreateApiView(generics.CreateAPIView):
 class LessonsCalendarListApiView(generics.ListAPIView):
 
     def get_queryset(self):
+        if self.request.GET.get("day"):
+            return Lesson.objects.filter(group=self.kwargs["id"], day=self.request.GET.get("day"))
         return Lesson.objects.filter(group=self.kwargs["id"])
 
     serializer_class = LessonInfoSerializer
-    #
-    # def get(self, request, *args, **kwargs):
-    #     return JsonResponse({"title": "Event 1", "start": "2020-09-05T09:00:00", "end": "2020-09-05T18:00:00"})

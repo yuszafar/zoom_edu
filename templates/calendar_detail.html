@@ -26,6 +26,10 @@
                 locale: 'ru',
                 dateClick: function (info) {
                     {#alert('Clicked on: ' + info.dateStr);#}
+
+                    $.getJSON(url, {day: info.dateStr}, function (data, textStatus, jqXHR){
+                        alert('status: ' + textStatus + ', data:' + data[0].start);
+                    });
                     selected_date = info.dateStr
                     dialog.dialog("open");
 
