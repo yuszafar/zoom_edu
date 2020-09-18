@@ -31,7 +31,7 @@
                         {#alert('status: ' + textStatus + ', data:' + data[0].start);#}
                         for (key in data) {
                             $('#' + data[key].less_numb).val(data[key].less_info_id);
-                            $('#delete_les_' + data[key].less_numb).val(data[key].less_info_id);
+                            $('#delete_les_' + data[key].less_numb).val(data[key].id);
                         }
                     });
                     selected_date = info.dateStr
@@ -71,9 +71,9 @@
                 for (i = 1; i < lessons_form.length; i++) {
 
                     let formData = new FormData();
-                    if (document.getElementById("delete_les_" + lessons_form[i].id).value !== "" && lessons_form[i].value === "") {
-                        var delete_url = "api/v1/lessons/delete/" + document.getElementById("delete_les_" + lessons_form[i].id).value
-                        print(delete_url)
+
+                    if (document.getElementById("delete_les_" + lessons_form[i].id).value !== "") {
+                        var delete_url = "/api/v1/lessons/delete/" + document.getElementById("delete_les_" + lessons_form[i].id).value
                         $.ajax({
                             headers: {"X-CSRFToken": "{{csrf_token}}"},
                             url: delete_url,
@@ -81,15 +81,14 @@
                             contentType: false,
                             method: 'DELETE',
                             success: function (data) {
-                                alert('успех! 22');
+                                {#alert('успех! 22');#}
                             },
                             error: function (data) {
-                                alert('Ошибка 22');
+                                {#alert('Ошибка 22');#}
                             }
                         });
                     }
                     if (lessons_form[i].value !== "") {
-                        alert(lessons_form[i].value)
                         formData.append('lesson_info', lessons_form[i].value);
                         formData.append('day', selected_date);
                         formData.append('lesson_time', lessons_form[i].id);
@@ -104,17 +103,17 @@
                             data: formData,
                             success: function (data) {
 
-                                alert('успех!');
+                                {#alert('успех!');#}
                             },
                             error: function (data) {
-                                alert('Ошибка');
+                                {#alert('Ошибка');#}
                             }
                         });
                     }
-
-
                 }
 
+                {#calendar.fullCalendar('refetch');#}
+                location.reload();
             }
 
             dialog = $("#dialog-form").dialog({
