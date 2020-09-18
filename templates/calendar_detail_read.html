@@ -22,10 +22,9 @@
             var url = "{% url 'api_v1:lesson_list_calendar' studentgroup.id %}";
             var curday;
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+                initialView: 'dayGridWeek',
                 selectable: true,
                 locale: 'ru',
-                {#slotLabelInterval: "01:30:00",#}
                 dateClick: function (info) {
 
                     $.getJSON(url, {day: info.dateStr}, function (data, textStatus, jqXHR) {
