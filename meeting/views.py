@@ -11,7 +11,7 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'base.html'
 
 
-class CalendarRouterView(generic.View):
+class CalendarRouterView(LoginRequiredMixin, generic.View):
     def get(self, request):
         if request.user.profile.level == "Teacher":
             return HttpResponseRedirect(reverse_lazy('meeting:calendar_teacher'))
@@ -20,12 +20,13 @@ class CalendarRouterView(generic.View):
         elif request.user.profile.level == "Training_division":
             return HttpResponseRedirect(reverse_lazy('meeting:calendar_list'))
 
-class CalendarListView(generic.ListView):
+
+class CalendarListView(LoginRequiredMixin, generic.ListView):
     template_name = 'calendar_list.html'
     model = StudentGroup
 
 
-class CalendarDetailView(generic.DeleteView):
+class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
     template_name = 'calendar_detail.html'
     model = StudentGroup
     def get_context_data(self, **kwargs):
@@ -35,11 +36,11 @@ class CalendarDetailView(generic.DeleteView):
         return context
 
 
-class TeacherCalendarView(generic.TemplateView):
+class TeacherCalendarView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'teacher_calendar.html'
 
 
-class StudentCalendarView(generic.TemplateView):
+class StudentCalendarView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'student_calendar.html'
 
 
@@ -50,22 +51,22 @@ class LessonsTimeView(generic.ListView):
 
 
 
-class LessonsTimeUpdateView(generic.ListView):
+class LessonsTimeUpdateView(LoginRequiredMixin, generic.ListView):
     template_name = 'lessons_time_update.html'
     model = LessonTime
     ordering = "number"
 
 
-class CreatUserView(generic.TemplateView):
+class CreatUserView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'create_user.html'
 
 
-class LessonInfoListView(generic.ListView):
+class LessonInfoListView(LoginRequiredMixin, generic.ListView):
     template_name = 'lesson_infos.html'
     model = LessonInfo
 
 
-class LessonInfoCreateVirew(generic.TemplateView):
+class LessonInfoCreateVirew(LoginRequiredMixin, generic.TemplateView):
     template_name = 'create_lesson_info.html'
 
     def get_context_data(self, **kwargs):
@@ -75,17 +76,17 @@ class LessonInfoCreateVirew(generic.TemplateView):
         return context
 
 
-class ProfileListView(generic.ListView):
+class ProfileListView(LoginRequiredMixin, generic.ListView):
     model = Profile
     template_name = 'profiles.html'
 
 
-class GroupListView(generic.ListView):
+class GroupListView(LoginRequiredMixin, generic.ListView):
     template_name = 'group_list.html'
     model = StudentGroup
 
 
-class GroupCreateView(generic.TemplateView):
+class GroupCreateView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'create_group.html'
 
     def get_context_data(self, **kwargs):
