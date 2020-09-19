@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
 
+from Lesson.models import LessonInfo, Lesson
 from .serializers import LessonInfoCreateSerializer, LessonCreateSerializer, LessonInfoSerializer, LessonDeleteSerializer
-from meeting.models import LessonInfo, Lesson, LessonTime
 
 
 class LessonInfoCreateApiView(generics.CreateAPIView):

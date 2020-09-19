@@ -49,7 +49,7 @@
 
         <div class="pull-right right-div">
             <h4> username: {{ request.user.username }} </h4>
-            <a href="{% url 'meeting:logout' %}" class="btn btn-danger">Выход</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Выход</a>
         </div>
 
     </div>
@@ -66,12 +66,12 @@
                 <div class="navbar-collapse collapse ">
 
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
-                        <li><a id="nav-stream" href="{% url "meeting:calendar" %}" class="">Расписание</a></li>
-                        <li><a id="nav-subs" href="{% url "meeting:time" %}">Время занятий</a></li>
-                        <li><a id="nav-mystreams" href="{% url "meeting:user_list" %}">пользователи</a></li>
+                        <li><a id="nav-stream" href="{% url "calendar:calendar_index" %}" class="">Расписание</a></li>
+                        <li><a id="nav-subs" href="{% url "lesson:time" %}">Время занятий</a></li>
+                        <li><a id="nav-mystreams" href="{% url "profile:list" %}">пользователи</a></li>
 
-                        <li><a id="nav-create" href="{% url 'meeting:lesson_info' %}">Дисциплины</a></li>
-                        <li><a id="nav-create" href="{% url 'meeting:group_list' %}">Группы</a></li>
+                        <li><a id="nav-create" href="{% url 'lesson:info' %}">Дисциплины</a></li>
+                        <li><a id="nav-create" href="{% url 'profile:group_list' %}">Группы</a></li>
 
                     </ul>
                 </div>

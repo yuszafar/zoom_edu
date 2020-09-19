@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from meeting.models import Profile
+from Profile.models import Profile
 from .serializers import ProfileSerializer
 
 

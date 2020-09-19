@@ -1,7 +1,8 @@
 from django.db.migrations import serializer
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from meeting.models import LessonInfo, Lesson, LessonTime
+
+from Lesson.models import LessonInfo, Lesson
 from ..student_group.serializers import CreateGroupSerializer
 
 

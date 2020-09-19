@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="right-div">
-                <a class="btn btn-success" href="{% url 'meeting:group_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
+                <a class="btn btn-success" href="{% url 'Index:group_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
             </div>
         </div>
         <div class="col-md-12">
@@ -32,7 +32,7 @@
                                 <tr class="odd gradeX">
 
                                         <td>{{ forloop.counter }}</td>
-                                    <td><a href="{% url 'meeting:calendar_detail' group.id %}">{{ group.group_name }}</a></td>
+                                    <td><a href="{% url 'Index:calendar_detail' group.id %}">{{ group.group_name }}</a></td>
                                         <td>{{ group.students.count }}</td>
 
                                 </tr>

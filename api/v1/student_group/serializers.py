@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-from meeting.models import  StudentGroup
+
+from Profile.models import StudentGroup
 
 
 class CreateGroupSerializer(ModelSerializer):

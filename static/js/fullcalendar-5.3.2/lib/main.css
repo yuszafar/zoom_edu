@@ -709,7 +709,7 @@ A HORIZONTAL event
   display: table; }
 .fc .fc-daygrid-body { /* a <div> that wraps the table */
     position: relative;
-    z-index: 1; /* container inner z-index's because <tr>s can't do it */
+    z-index: 1; /* container inner z-Index's because <tr>s can't do it */
   }
 .fc .fc-daygrid-day.fc-day-today {
       background-color: rgba(255, 220, 40, 0.15);
@@ -1148,7 +1148,7 @@ A VERTICAL event
   left: 0;
   }
 .fc-media-screen .fc-timegrid-cols {
-    position: absolute; /* no z-index. children will decide and go above slots */
+    position: absolute; /* no z-Index. children will decide and go above slots */
     top: 0;
     left: 0;
     right: 0;
@@ -1188,7 +1188,7 @@ A VERTICAL event
 
   /* fg events */
   /* (the mirror segs are put into a separate container with same classname, */
-  /* and they must be after the normal seg container to appear at a higher z-index) */
+  /* and they must be after the normal seg container to appear at a higher z-Index) */
 
 }
 .fc .fc-timegrid-col-events {
@@ -1203,7 +1203,7 @@ A VERTICAL event
 .fc .fc-timegrid-now-indicator-container {
     bottom: 0;
     overflow: hidden; /* don't let overflow of lines/arrows cause unnecessary scrolling */
-    /* z-index is set on the individual elements */
+    /* z-Index is set on the individual elements */
   }
 .fc-direction-ltr .fc-timegrid-col-events {
     margin: 0 2.5% 0 2px;

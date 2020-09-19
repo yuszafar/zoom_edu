@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer, HiddenField
-from meeting.models import LessonTime
+
+from Lesson.models import LessonTime
 
 
 class LessonsTimeSerializer(ModelSerializer):

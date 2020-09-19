@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'meeting',
+    'Index',
+    'Lesson',
+    'Profile',
+    'Calendar',
     'rest_framework',
 ]
 
@@ -134,7 +137,7 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
-LOGIN_URL = reverse_lazy('meeting:login')
+LOGIN_URL = reverse_lazy('Index:login')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

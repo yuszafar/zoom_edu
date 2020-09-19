@@ -2,7 +2,6 @@ from rest_framework import generics
 from rest_framework.response import Response
 
 from .serializers import CreateGroupSerializer
-from meeting.models import StudentGroup
 
 
 class CreateGroupApiView(generics.CreateAPIView):

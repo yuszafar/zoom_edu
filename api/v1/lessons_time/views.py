@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
+from Lesson.models import LessonTime
 from .serializers import LessonsTimeSerializer, LessonsUpdateSerializer
-from meeting.models import LessonTime
 from rest_framework.permissions import IsAuthenticated
 
 

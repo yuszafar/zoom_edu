@@ -567,7 +567,7 @@ var FullCalendar = (function (exports) {
         ];
     }
     function arrayToUtcDate(a) {
-        // according to web standards (and Safari), a month index is required.
+        // according to web standards (and Safari), a month Index is required.
         // massage if only given a year.
         if (a.length === 1) {
             a = a.concat([0]);
@@ -4783,7 +4783,7 @@ var FullCalendar = (function (exports) {
             this.tops = tops;
             this.bottoms = bottoms;
         };
-        // Given a left offset (from document left), returns the index of the el that it horizontally intersects.
+        // Given a left offset (from document left), returns the Index of the el that it horizontally intersects.
         // If no intersection is made, returns undefined.
         PositionCache.prototype.leftToIndex = function (leftPosition) {
             var lefts = this.lefts;
@@ -4796,7 +4796,7 @@ var FullCalendar = (function (exports) {
                 }
             }
         };
-        // Given a top offset (from document top), returns the index of the el that it vertically intersects.
+        // Given a top offset (from document top), returns the Index of the el that it vertically intersects.
         // If no intersection is made, returns undefined.
         PositionCache.prototype.topToIndex = function (topPosition) {
             var tops = this.tops;
@@ -4809,11 +4809,11 @@ var FullCalendar = (function (exports) {
                 }
             }
         };
-        // Gets the width of the element at the given index
+        // Gets the width of the element at the given Index
         PositionCache.prototype.getWidth = function (leftIndex) {
             return this.rights[leftIndex] - this.lefts[leftIndex];
         };
-        // Gets the height of the element at the given index
+        // Gets the height of the element at the given Index
         PositionCache.prototype.getHeight = function (topIndex) {
             return this.bottoms[topIndex] - this.tops[topIndex];
         };
@@ -6208,7 +6208,7 @@ var FullCalendar = (function (exports) {
         // Initializes internal variables related to calculating hidden days-of-week
         DateProfileGenerator.prototype.initHiddenDays = function () {
             var hiddenDays = this.props.hiddenDays || []; // array of day-of-week indices that are hidden
-            var isHiddenDayHash = []; // is the day-of-week hidden? (hash with day-of-week-index -> bool)
+            var isHiddenDayHash = []; // is the day-of-week hidden? (hash with day-of-week-Index -> bool)
             var dayCnt = 0;
             var i;
             if (this.props.weekends === false) {
@@ -6241,7 +6241,7 @@ var FullCalendar = (function (exports) {
             return null;
         };
         // Is the current day hidden?
-        // `day` is a day-of-week index (0-6), or a Date (used for UTC)
+        // `day` is a day-of-week Index (0-6), or a Date (used for UTC)
         DateProfileGenerator.prototype.isHiddenDay = function (day) {
             if (day instanceof Date) {
                 day = day.getUTCDay();
@@ -8276,8 +8276,8 @@ var FullCalendar = (function (exports) {
             this.cnt = dates.length;
         }
         DaySeriesModel.prototype.sliceRange = function (range) {
-            var firstIndex = this.getDateDayIndex(range.start); // inclusive first index
-            var lastIndex = this.getDateDayIndex(addDays(range.end, -1)); // inclusive last index
+            var firstIndex = this.getDateDayIndex(range.start); // inclusive first Index
+            var lastIndex = this.getDateDayIndex(addDays(range.end, -1)); // inclusive last Index
             var clippedFirstIndex = Math.max(0, firstIndex);
             var clippedLastIndex = Math.min(this.cnt - 1, lastIndex);
             // deal with in-between indices
@@ -8295,7 +8295,7 @@ var FullCalendar = (function (exports) {
                 return null;
             }
         };
-        // Given a date, returns its chronolocial cell-index from the first cell of the grid.
+        // Given a date, returns its chronolocial cell-Index from the first cell of the grid.
         // If the date lies between cells (because of hiddenDays), returns a floating-point value between offsets.
         // If before the first offset, returns a negative number.
         // If after the last offset, returns an offset past the last cell offset.
@@ -8676,7 +8676,7 @@ var FullCalendar = (function (exports) {
             return refCallback;
         };
         // TODO: check callers that don't care about order. should use getAll instead
-        // NOTE: this method has become less valuable now that we are encouraged to map order by some other index
+        // NOTE: this method has become less valuable now that we are encouraged to map order by some other Index
         // TODO: provide ONE array-export function, buildArray, which fails on non-numeric indexes. caller can manipulate and "collect"
         RefMap.prototype.collect = function (startIndex, endIndex, step) {
             return collectFromHash(this.currentMap, startIndex, endIndex, step);
@@ -11858,7 +11858,7 @@ var FullCalendar = (function (exports) {
                         var doomedLevel = currentLevel - 1;
                         while (visibleColPlacements[col].length > doomedLevel) {
                             recordHidden(visibleColPlacements[col].pop(), // removes
-                            visibleColPlacements[col].length, // will execute after the pop. will be the index of the removed placement
+                            visibleColPlacements[col].length, // will execute after the pop. will be the Index of the removed placement
                             false);
                         }
                     }
@@ -12605,7 +12605,7 @@ var FullCalendar = (function (exports) {
             // constrained because slotMinTime/slotMaxTime might be customized.
             slatCoverage = Math.max(0, slatCoverage);
             slatCoverage = Math.min(len, slatCoverage);
-            // an integer index of the furthest whole slat
+            // an integer Index of the furthest whole slat
             // from 0 to number slats (*exclusive*, so len-1)
             slatIndex = Math.floor(slatCoverage);
             slatIndex = Math.min(slatIndex, len - 1);

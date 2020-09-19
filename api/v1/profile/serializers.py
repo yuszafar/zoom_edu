@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from meeting.models import Profile
+
+from Profile.models import Profile
 
 
 class ProfileSerializer(ModelSerializer):
