@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id='calendar'></div>
+
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var url = "{% url 'api_v1:lesson_teacher_list_calendar' request.user.profile.id %}";
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                locale: 'ru',
+                eventSources: [
+
+                    // your event source
+                    {
+                        url: url,
+                        method: 'GET',
+                        failure: function () {
+                            alert(url);
+                        },
+                        color: 'yellow',   // a non-ajax option
+                        textColor: 'black' // a non-ajax option
+                    }
+
+                    // any other sources...
+                ]
+            });
+
+
+            calendar.render();
+
+
+
+
+        });
+
+
+    </script>
+
+
+{% endblock %}
+

@@ -5,8 +5,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 app_name = 'meeting'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('calendar/', views.CalendarRouterView.as_view(), name='calendar'),
     path('calendar/list/', views.CalendarListView.as_view(), name='calendar_list'),
     path('calendar/<int:pk>', views.CalendarDetailView.as_view(), name='calendar_detail'),
+    path('calendar/teacher/', views.TeacherCalendarView.as_view(), name='calendar_teacher'),
+    path('calendar/student/', views.StudentCalendarView.as_view(), name='calendar_student'),
 
     path('user/create/', views.CreatUserView.as_view(), name='create_user'),
     path('user/list/', views.ProfileListView.as_view(), name='user_list'),
