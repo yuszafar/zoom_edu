@@ -137,7 +137,7 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
-LOGIN_URL = reverse_lazy('Index:login')
+LOGIN_URL = reverse_lazy('login')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

@@ -31,7 +31,7 @@
                     <p>Введен неверный логин или пароль</p>
                 </div>
             {% endif %}
-            <form action="{% url 'Index:login' %}" method="post">
+            <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 {% if form.username.errors %}
                     <div class="text-danger">
