@@ -5,12 +5,12 @@ from Profile.models import StudentGroup, Profile
 
 
 class GroupListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'group_list.html'
+    template_name = 'profile/group/list.html'
     model = StudentGroup
 
 
 class GroupCreateView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'create_group.html'
+    template_name = 'profile/create/group.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,9 +19,9 @@ class GroupCreateView(LoginRequiredMixin, generic.TemplateView):
 
 
 class CreatUserView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'create_user.html'
+    template_name = 'profile/create/profile.html'
 
 
 class ProfileListView(LoginRequiredMixin, generic.ListView):
     model = Profile
-    template_name = 'profiles.html'
+    template_name = 'profile/list.html'

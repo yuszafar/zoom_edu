@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from Profile.models import Profile
+from Profile.models import Profile, StudentGroup
 
 
 class ProfileSerializer(ModelSerializer):
@@ -27,4 +27,9 @@ class ProfileSerializer(ModelSerializer):
         profile.save()
         return profile
 
+
+class CreateGroupSerializer(ModelSerializer):
+    class Meta:
+        model = StudentGroup
+        fields = '__all__'
 

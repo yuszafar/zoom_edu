@@ -1,18 +1,17 @@
 from django.urls import path
-from .lessons_time import views
-from .profile.views import CreateProfileApiView
-from .lessons.views import LessonInfoCreateApiView, LessonCreateApiView, LessonsCalendarListApiView, LessonDeleteApiView, LessonCalendarStudentListApiView
-from .student_group.views import CreateGroupApiView
+from .profile.views import CreateProfileApiView, CreateGroupApiView
+from .lessons.views import LessonInfoCreateApiView, LessonCreateApiView, LessonsCalendarListApiView, \
+    LessonDeleteApiView, LessonCalendarStudentListApiView, TimeListApiView, TimeUpdateView
 app_name = 'api_v1'
 urlpatterns = [
-    path('lessons/time/list/', views.TimeListApiView.as_view(), name='lesson_time_list'),
-    path('lessons/time/<int:id>', views.TimeUpdateView.as_view(), name='lesson_time'),
+    path('lesson/time/list/', TimeListApiView.as_view(), name='lesson_time_list'),
+    path('lesson/time/<int:id>', TimeUpdateView.as_view(), name='lesson_time'),
     path('profile/create/', CreateProfileApiView.as_view(), name='create_profile'),
-    path('lessons/info/create/', LessonInfoCreateApiView.as_view(), name='create_lesson_info'),
-    path('lessons/create/', LessonCreateApiView.as_view(), name='create_lesson'),
-    path('lessons/delete/<int:id>', LessonDeleteApiView.as_view(), name='delete_lesson'),
+    path('lesson/info/create/', LessonInfoCreateApiView.as_view(), name='create_lesson_info'),
+    path('lesson/create/', LessonCreateApiView.as_view(), name='create_lesson'),
+    path('lesson/delete/<int:id>', LessonDeleteApiView.as_view(), name='delete_lesson'),
     path('group/create/', CreateGroupApiView.as_view(), name='create_group'),
-    path('lessons/calendar/list/<int:id>', LessonsCalendarListApiView.as_view(), name='lesson_list_calendar'),
-    path('lessons/calendar/teacher/list/<int:id>', LessonCalendarStudentListApiView.as_view(), name='lesson_teacher_list_calendar'),
-    path('lessons/calendar/student/list/<int:id>', LessonsCalendarListApiView.as_view(), name='lesson_list_calendar'),
+    path('lesson/calendar/list/<int:id>', LessonsCalendarListApiView.as_view(), name='lesson_list_calendar'),
+    path('lesson/calendar/teacher/list/<int:id>', LessonCalendarStudentListApiView.as_view(), name='lesson_teacher_list_calendar'),
+    path('lesson/calendar/student/list/<int:id>', LessonsCalendarListApiView.as_view(), name='lesson_list_calendar'),
 ]

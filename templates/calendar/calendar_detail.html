@@ -75,7 +75,7 @@
                     if (lessons_form[i].value === "") {
                         for (key in curday) {
                             if (curday[key].less_numb === lessons_form[i].id) {
-                                var delete_url = "/api/v1/lessons/delete/" + curday[key].id;
+                                var delete_url = "/api/v1/lesson/delete/" + curday[key].id;
                                 $.ajax({
                                     headers: {"X-CSRFToken": "{{csrf_token}}"},
                                     url: delete_url,

@@ -1,9 +1,10 @@
-from django.http import JsonResponse
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from Lesson.models import LessonInfo, Lesson
-from .serializers import LessonInfoCreateSerializer, LessonCreateSerializer, LessonInfoSerializer, LessonDeleteSerializer
+from Lesson.models import LessonInfo, Lesson, LessonTime
+from .serializers import LessonInfoCreateSerializer, LessonCreateSerializer, LessonInfoSerializer, \
+    LessonDeleteSerializer, LessonsTimeSerializer, LessonsUpdateSerializer
 
 
 class LessonInfoCreateApiView(generics.CreateAPIView):
@@ -52,3 +53,24 @@ class LessonCalendarStudentListApiView(generics.ListAPIView):
 
     def get_queryset(self):
         return Lesson.objects.filter(lesson_info__teacher_id=self.kwargs["id"])
+
+class TimeListApiView(generics.ListAPIView):
+    queryset = LessonTime.objects.all()
+    serializer_class = LessonsTimeSerializer
+
+
+class TimeUpdateView(generics.UpdateAPIView, generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = LessonTime.objects.all()
+    serializer_class = LessonsUpdateSerializer
+    lookup_url_kwarg = 'id'
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return []
+        return super(TimeUpdateView, self).get_permissions()
+
+    def put(self, request, *args, **kwargs):
+        if request.user.profile.level != "Training_division":
+            return Response({'error': 'you not have permission '}, status=401)
+        return super(TimeUpdateView, self).put(request, *args, **kwargs)

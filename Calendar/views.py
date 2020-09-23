@@ -13,20 +13,20 @@ from Profile.models import StudentGroup
 class CalendarRouterView(LoginRequiredMixin, generic.View):
     def get(self, request):
         if request.user.profile.level == "Teacher":
-            return HttpResponseRedirect(reverse_lazy('Index:calendar_teacher'))
+            return HttpResponseRedirect(reverse_lazy('calendar:calendar_teacher'))
         elif request.user.profile.level == "Student":
-            return HttpResponseRedirect(reverse_lazy('Index:calendar_student'))
+            return HttpResponseRedirect(reverse_lazy('calendar:calendar_student'))
         elif request.user.profile.level == "Training_division":
-            return HttpResponseRedirect(reverse_lazy('Index:calendar_list'))
+            return HttpResponseRedirect(reverse_lazy('calendar:calendar_list'))
 
 
 class CalendarListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'calendar_list.html'
+    template_name = 'calendar/calendar_list.html'
     model = StudentGroup
 
 
 class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
-    template_name = 'calendar_detail.html'
+    template_name = 'calendar/calendar_detail.html'
     model = StudentGroup
 
     def get_context_data(self, **kwargs):
@@ -37,8 +37,8 @@ class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
 
 
 class TeacherCalendarView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'teacher_calendar.html'
+    template_name = 'calendar/teacher_calendar.html'
 
 
 class StudentCalendarView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'student_calendar.html'
+    template_name = 'calendar/student_calendar.html'

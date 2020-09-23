@@ -54,7 +54,7 @@ class Lesson(models.Model):
         return self.lesson_info.name
 
     def get_url(self):
-        return 'http://google.com'
+        return self.zum_url
 
     def get_less_time_number(self):
         return self.lesson_time.number
