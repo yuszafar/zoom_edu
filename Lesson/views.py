@@ -2,8 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 # Create your views here.
-from Lesson.models import LessonTime, LessonInfo, LessonType
+from Lesson.models import LessonTime, LessonInfo, LessonType, Lesson
 from Profile.models import Profile
+import datetime
 
 
 class LessonsTimeView(generic.ListView):
@@ -29,6 +30,7 @@ class LessonInfoListView(LoginRequiredMixin, generic.ListView):
             return LessonInfo.objects.filter(teacher_id=self.request.user.profile.id)
         elif self.request.user.profile.level == "Student":
             return LessonInfo.objects.filter(lesson__group__in=self.request.user.profile.studentgroup_set.all())
+        return LessonInfo.objects.none()
 
 
 class LessonInfoCreateVirew(LoginRequiredMixin, generic.TemplateView):
@@ -39,3 +41,6 @@ class LessonInfoCreateVirew(LoginRequiredMixin, generic.TemplateView):
         context["teacher_list"] = Profile.objects.filter(level="Teacher")
         context["type_list"] = LessonType.objects.all()
         return context
+
+
+

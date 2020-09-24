@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="right-div">
+                <a class="btn btn-success" href="{% url 'profile:group_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Дисчеплины
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="lesson_info_table">
+
+                            <thead>
+
+                            <tr>
+                                <th class="text-center">№</th>
+                                <th class="text-center">Группа</th>
+                                <th class="text-center">Дисциплина</th>
+                                <th class="text-center">начало</th>
+                                <th class="text-center">Ссылка zoom</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for lesson in lesson_list %}
+                                <tr class="odd gradeX">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ lesson.group.group_name }}</td>
+                                    <td>{{ lesson.lesson_info.name }}</td>
+                                    <td>{{ lesson.day.isoformat }} {{ lesson.lesson_time.start.isoformat }}</td>
+                                    <td><a href="{{ lesson.zum_url }}">ссылка</a></td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <!--End Advanced Tables -->
+        </div>
+    </div>
+
+{% endblock %}

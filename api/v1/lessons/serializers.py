@@ -2,7 +2,7 @@ from django.db.migrations import serializer
 import requests
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-
+import os
 from Lesson.models import LessonInfo, Lesson, LessonTime
 
 
@@ -35,9 +35,10 @@ class LessonCreateSerializer(ModelSerializer):
         else:
             answer = Lesson.objects.create(**validated_data)
             headers = {
-                "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IkFfWWU0Qm9uUnRxcy00cDVDd1d6SnciLCJleHAiOjE2MDE0NjQ0NjEsImlhdCI6MTYwMDg1OTY2MX0.R6fAQA3f5IzE2KlIjwHgHHZQj55q9bJJzus2mizp1RQ",
+                "Authorization": "Bearer " + os.getenv("ZOOM_TOKEN"),
                 "content-type": "application/json"
             }
+
             data = {
                 "topic": answer.get_less_name(),
                 "type": 2,
@@ -45,11 +46,11 @@ class LessonCreateSerializer(ModelSerializer):
                 "duration": 90,
                 "timezone": "Asia/Tashkent"
             }
-            # print(data)
-            response = requests.post(url='https://api.zoom.us/v2/users/XhbF5D0XTuSkNXprvMZRZQ/meetings', json=data, headers=headers)
-            # print(response.status_code)
+            response = requests.post(url='https://api.zoom.us/v2/users/%s/meetings' % (os.getenv("ZOOM_USER_ID")), json=data, headers=headers)
+
             answer.zum_url = response.json()['join_url']
-            #
+            answer.zoom_start_url = response.json()['start_url']
+
             answer.save()
             return answer
 
@@ -59,6 +60,18 @@ class LessonInfoSerializer(ModelSerializer):
     end = serializers.CharField(source='get_end_datetime')
     title = serializers.CharField(source='get_less_name')
     url = serializers.CharField(source='get_url')
+    less_numb = serializers.CharField(source='get_less_time_number')
+    less_info_id = serializers.CharField(source='get_les_info_id')
+    class Meta:
+        model = Lesson
+        fields = ['id', 'start', 'end', 'title', 'url', 'less_numb', 'less_info_id']
+
+
+class LessonInfoTeacherSerializer(ModelSerializer):
+    start = serializers.CharField(source='get_start_datetime')
+    end = serializers.CharField(source='get_end_datetime')
+    title = serializers.CharField(source='get_less_name')
+    url = serializers.CharField(source='get_start_url')
     less_numb = serializers.CharField(source='get_less_time_number')
     less_info_id = serializers.CharField(source='get_les_info_id')
     class Meta:

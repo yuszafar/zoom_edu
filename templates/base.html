@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset='utf-8' />
+    <meta charset='utf-8'/>
     <!-- Calendar  -->
     <link href='{% static 'js/fullcalendar-5.3.2/lib/main.css' %}' rel='stylesheet'/>
     <script src='{% static 'js/fullcalendar-5.3.2/lib/main.js' %}'></script>
 
-     <!-- jquery-ui  -->
+    <!-- jquery-ui  -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -28,9 +28,9 @@
     <!-- CUSTOM STYLE  -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
     <!-- GOOGLE FONT -->
-    <link href="{% static 'js/dataTables/dataTables.bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'js/dataTables/dataTables.bootstrap.css' %}" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
 </head>
 <body>
 <div class="navbar navbar-inverse set-radius-zero">
@@ -44,15 +44,15 @@
 
 
         </div>
-    <div class="row">
+        <div class="row">
 
 
-        <div class="pull-right right-div">
-            <h4> username: {{ request.user.username }} </h4>
-            <a href="{% url 'logout' %}" class="btn btn-danger">Выход</a>
+            <div class="pull-right right-div">
+                <h4> username: {{ request.user.username }} </h4>
+                <a href="{% url 'logout' %}" class="btn btn-danger">Выход</a>
+            </div>
+
         </div>
-
-    </div>
 
 
     </div>
@@ -64,9 +64,12 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="navbar-collapse collapse ">
-
+                    <ul id="menu-top" class="nav navbar-nav navbar-left">
+                        <li><a id="nav-stream" href="/" class="">Главная</a></li>
+                    </ul>
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
-                        <li><a id="nav-stream" href="{% url "calendar:calendar_index" %}" class="">Расписание</a></li>
+
+                        <li><a id="nav-stream" href="{% url "calendar:list" %}" class="">Расписание</a></li>
                         <li><a id="nav-subs" href="{% url "lesson:time" %}">Время занятий</a></li>
                         <li><a id="nav-mystreams" href="{% url "profile:list" %}">пользователи</a></li>
 
@@ -99,12 +102,12 @@
 {#    <!-- CORE JQUERY  -->#}
 {#    <script src="{% static "js/jquery-1.10.2.js" %}"></script>#}
 {#    <!-- BOOTSTRAP SCRIPTS  -->#}
-    <script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
 {#    <!-- DATATABLE SCRIPTS  -->#}
-    <script src="{% static "js/dataTables/jquery.dataTables.js" %}"></script>
-    <script src="{% static "js/dataTables/dataTables.bootstrap.js" %}"></script>
+<script src="{% static "js/dataTables/jquery.dataTables.js" %}"></script>
+<script src="{% static "js/dataTables/dataTables.bootstrap.js" %}"></script>
 {#      <!-- CUSTOM SCRIPTS  -->#}
-    <script src="{% static "js/custom.js" %}"></script>
+<script src="{% static "js/custom.js" %}"></script>
 
 </body>
 </html>

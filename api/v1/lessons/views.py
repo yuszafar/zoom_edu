@@ -1,10 +1,13 @@
+import datetime
+
+from django.db.models import Q
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from Lesson.models import LessonInfo, Lesson, LessonTime
 from .serializers import LessonInfoCreateSerializer, LessonCreateSerializer, LessonInfoSerializer, \
-    LessonDeleteSerializer, LessonsTimeSerializer, LessonsUpdateSerializer
+    LessonDeleteSerializer, LessonsTimeSerializer, LessonsUpdateSerializer, LessonInfoTeacherSerializer
 
 
 class LessonInfoCreateApiView(generics.CreateAPIView):
@@ -23,7 +26,7 @@ class LessonCreateApiView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         if request.user.profile.level != "Training_division":
-            return Response({'error': 'you not have permission '}, status=401)
+            return Response({'errorLessonInfoSerializer': 'you not have permission '}, status=401)
         return super(LessonCreateApiView, self).post(request, *args, **kwargs)
 
 
@@ -39,13 +42,17 @@ class LessonDeleteApiView(generics.DestroyAPIView):
 
 
 class LessonsCalendarListApiView(generics.ListAPIView):
+    def get_serializer_class(self):
+        if self.request.user.profile.level == "Teacher":
+            return LessonInfoTeacherSerializer
+        return LessonInfoSerializer
 
     def get_queryset(self):
         if self.request.GET.get("day"):
             return Lesson.objects.filter(group=self.kwargs["id"], day=self.request.GET.get("day"))
+
         return Lesson.objects.filter(group=self.kwargs["id"])
 
-    serializer_class = LessonInfoSerializer
 
 
 class LessonCalendarStudentListApiView(generics.ListAPIView):

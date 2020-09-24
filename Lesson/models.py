@@ -43,6 +43,7 @@ class Lesson(models.Model):
     zum_url = models.URLField(null=True, blank=True)
     group = models.ForeignKey(StudentGroup, on_delete=models.CASCADE, null=True)
     lesson_time = models.ForeignKey(LessonTime, on_delete=models.CASCADE)
+    zoom_start_url = models.URLField(null=True, blank=True)
 
     def get_start_datetime(self):
         return str(self.day) + "T" + str(self.lesson_time.start)
@@ -55,6 +56,9 @@ class Lesson(models.Model):
 
     def get_url(self):
         return self.zum_url
+
+    def get_start_url(self):
+        return self.zoom_start_url
 
     def get_less_time_number(self):
         return self.lesson_time.number

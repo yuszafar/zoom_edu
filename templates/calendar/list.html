@@ -4,11 +4,6 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <div class="right-div">
-                <a class="btn btn-success" href="{% url 'profile:group_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
-            </div>
-        </div>
-        <div class="col-md-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -24,6 +19,9 @@
                                 <th class="text-center">№</th>
                                 <th class="text-center">Группа</th>
                                 <th class="text-center">Кол-во</th>
+                                {% if request.user.profile.level == "Training_division" %}
+                                <th class="text-center" style="width: 20px;">Обновить</th>
+                                {% endif %}
 
                             </tr>
                             </thead>
@@ -31,10 +29,13 @@
                             {% for group in studentgroup_list %}
                                 <tr class="odd gradeX">
 
-                                        <td>{{ forloop.counter }}</td>
-                                    <td><a href="{% url 'calendar:calendar_detail' group.id %}">{{ group.group_name }}</a></td>
-                                        <td>{{ group.students.count }}</td>
-
+                                    <td class="text-center">{{ forloop.counter }}</td>
+                                    <td class="text-center"><a href="{% url 'calendar:detail' group.id %}">{{ group.group_name }}</a></td>
+                                    <td class="text-center">{{ group.students.count }}</td>
+                                    {% if request.user.profile.level == "Training_division" %}
+                                    <td class="text-center" style="width: 20px;"><a class="btn btn-primary btn-sm" style="" href="{% url 'calendar:update' group.id %}"> <i
+                                                class="fa fa-refresh "></i></a></td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

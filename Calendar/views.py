@@ -10,23 +10,23 @@ from Lesson.models import LessonInfo, LessonTime
 from Profile.models import StudentGroup
 
 
-class CalendarRouterView(LoginRequiredMixin, generic.View):
-    def get(self, request):
-        if request.user.profile.level == "Teacher":
-            return HttpResponseRedirect(reverse_lazy('calendar:calendar_teacher'))
-        elif request.user.profile.level == "Student":
-            return HttpResponseRedirect(reverse_lazy('calendar:calendar_student'))
-        elif request.user.profile.level == "Training_division":
-            return HttpResponseRedirect(reverse_lazy('calendar:calendar_list'))
 
 
 class CalendarListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'calendar/calendar_list.html'
+    template_name = 'calendar/list.html'
     model = StudentGroup
+    def get_queryset(self):
+        if self.request.user.profile.level == "Training_division":
+            return StudentGroup.objects.all()
+        elif self.request.user.profile.level == "Teacher":
+            return StudentGroup.objects.filter(lesson__lesson_info__teacher=self.request.user.profile).distinct().all()
+        elif self.request.user.profile.level == "Student":
+            return self.request.user.profile.studentgroup_set.all()
+        return StudentGroup.objects.none()
 
 
-class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
-    template_name = 'calendar/calendar_detail.html'
+class CalendarUpdateView(LoginRequiredMixin, generic.DeleteView):
+    template_name = 'calendar/update/calendar.html'
     model = StudentGroup
 
     def get_context_data(self, **kwargs):
@@ -36,9 +36,14 @@ class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
         return context
 
 
-class TeacherCalendarView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'calendar/teacher_calendar.html'
+class CalendarDetailView(LoginRequiredMixin, generic.DeleteView):
+    template_name = 'calendar/detail.html'
+    model = StudentGroup
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["lesson_info_list"] = LessonInfo.objects.all()
+        context["lesson_time_list"] = LessonTime.objects.all()
+        return context
 
 
-class StudentCalendarView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'calendar/student_calendar.html'
