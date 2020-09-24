@@ -48,7 +48,7 @@ class LessonCreateSerializer(ModelSerializer):
             }
             response = requests.post(url='https://api.zoom.us/v2/users/%s/meetings' % (os.getenv("ZOOM_USER_ID")), json=data, headers=headers)
 
-            answer.zum_url = response.json()['join_url']
+            answer.zoom_join_url = response.json()['join_url']
             answer.zoom_start_url = response.json()['start_url']
 
             answer.save()

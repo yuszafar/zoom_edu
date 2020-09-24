@@ -12,7 +12,7 @@
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Дисчеплины
+                    Дисциплины
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -36,7 +36,7 @@
                                     <td>{{ lesson.group.group_name }}</td>
                                     <td>{{ lesson.lesson_info.name }}</td>
                                     <td>{{ lesson.day.isoformat }} {{ lesson.lesson_time.start.isoformat }}</td>
-                                    <td><a href="{{ lesson.zum_url }}">ссылка</a></td>
+                                    <td><a href="{{ lesson.zoom_join_url }}">ссылка</a></td>
 
                                 </tr>
                             {% endfor %}
