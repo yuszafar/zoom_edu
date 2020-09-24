@@ -59,7 +59,7 @@ class LessonInfoSerializer(ModelSerializer):
     start = serializers.CharField(source='get_start_datetime')
     end = serializers.CharField(source='get_end_datetime')
     title = serializers.CharField(source='get_less_name')
-    url = serializers.CharField(source='get_url')
+    url = serializers.CharField(source='zoom_join_url')
     less_numb = serializers.CharField(source='get_less_time_number')
     less_info_id = serializers.CharField(source='get_les_info_id')
     class Meta:

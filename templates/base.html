@@ -71,10 +71,16 @@
 
                         <li><a id="nav-stream" href="{% url "calendar:list" %}" class="">Расписание</a></li>
                         <li><a id="nav-subs" href="{% url "lesson:time" %}">Время занятий</a></li>
+                        {% if request.user.profile.level == "Training_division" %}
                         <li><a id="nav-mystreams" href="{% url "profile:list" %}">пользователи</a></li>
-
+                        {% endif %}
                         <li><a id="nav-create" href="{% url 'lesson:info' %}">Дисциплины</a></li>
-                        <li><a id="nav-create" href="{% url 'profile:group_list' %}">Группы</a></li>
+
+                        {% if request.user.profile.level == "Student" %}
+                        <li><a id="nav-create" href="{% url 'profile:group_list' %}">Моя группа</a></li>
+                        {% endif %}
+
+
 
                     </ul>
                 </div>
