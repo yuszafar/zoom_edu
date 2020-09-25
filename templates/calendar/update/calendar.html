@@ -22,7 +22,9 @@
             var url = "{% url 'api_v1:lesson_list_calendar' studentgroup.id %}";
             var curday;
             var calendar = new FullCalendar.Calendar(calendarEl, {
+
                 initialView: 'dayGridMonth',
+
                 selectable: true,
                 locale: 'ru',
                 dateClick: function (info) {
@@ -39,6 +41,8 @@
                     // change the day's background color just for fun
                     // info.dayEl.style.backgroundColor = 'red';
                 },
+
+
                 eventSources: [
 
                     // your event source
@@ -53,7 +57,11 @@
                     }
 
 
-                ]
+                ],
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                }
 
             });
 
