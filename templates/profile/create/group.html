@@ -11,17 +11,48 @@
                         <label for="group_name">Наименование группы</label>
                         <input id="group_name" class="form-control" type="text" value=""/>
                     </div>
-                    <div class="form-group">
-                        <label for="students">Список студентов</label>
-                        <select multiple id="students" class="form-control">
-                            {% for student in student_list %}
-                                {% if not student.studentgroup_set.count %}
-                                    <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
 
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="students">Список студентов</label>
+                                <select multiple id="students" class="form-control">
+                                    {% for student in student_list %}
+                                        {% if not student.studentgroup_set.count %}
+                                            <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-info" style="margin-top: 5px; width: 100%"> -> </button>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button class="btn btn-info" style="margin-top: 5px; width: 100%"> <- </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="students">Список группы</label>
+                                <select multiple id="students" class="form-control">
+                                    {% for student in student_list %}
+                                        {% if not student.studentgroup_set.count %}
+                                            <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
                     <button id="create_btn" class="btn btn-info" onclick="create_group()"
                             data-url="{% url 'api_v1:create_group' %}">Добавить
                     </button>
