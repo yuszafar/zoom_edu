@@ -16,7 +16,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="students">Список студентов</label>
-                                <select multiple id="students" class="form-control">
+                                <select multiple id="students" class="form-control" size="15">
                                     {% for student in student_list %}
                                         {% if not student.studentgroup_set.count %}
                                             <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
@@ -30,24 +30,21 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-info" style="margin-top: 5px; width: 100%"> -> </button>
+                                    <button id="moveright" class="btn btn-info" style="margin-top: 5px; width: 100%">
+                                        ->
+                                    </button>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button class="btn btn-info" style="margin-top: 5px; width: 100%"> <- </button>
+                                    <button id="moveleft" class="btn btn-info" style="margin-top: 5px; width: 100%"> <-</button>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label for="students">Список группы</label>
-                                <select multiple id="students" class="form-control">
-                                    {% for student in student_list %}
-                                        {% if not student.studentgroup_set.count %}
-                                            <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
-                                        {% endif %}
-                                    {% endfor %}
+                                <label for="studentgroup" >Список группы</label>
+                                <select multiple id="studentgroup" class="form-control" size="15">
                                 </select>
                             </div>
 
@@ -62,14 +59,25 @@
     </div>
 
     <script>
+        $("#moveright").click(function () {
+            $("#students > option:selected").each(function () {
+                $(this).remove().appendTo("#studentgroup");
+            });
+        });
+        $("#moveleft").click(function () {
+            $("#studentgroup > option:selected").each(function () {
+                $(this).remove().appendTo("#students");
+            });
+        });
 
         function create_group() {
 
             let formData = new FormData();
             formData.append('group_name', document.getElementById("group_name").value);
 
-            for (i = 0; i < $("#students").val().length; i++) {
-                formData.append('students', $("#students").val()[i]);
+            for (i = 0; i < $("#studentgroup option").length; i++) {
+                {#alert($("#studentgroup option")[i].value)#}
+                formData.append('students', $("#studentgroup option")[i].value);
             }
             var url = $("#create_btn").data("url");
 
