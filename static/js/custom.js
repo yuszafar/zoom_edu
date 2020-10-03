@@ -23,7 +23,7 @@
 
             $('#dataTables-example').dataTable(
                 {
-                    pageLength: 50,
+                    pageLength: 15,
                     ordering: false,
                     lengthChange: false,
                     oLanguage: {
@@ -34,7 +34,7 @@
             );
             $('#lesson_info_table').dataTable(
                 {
-                    pageLength: 50,
+                    pageLength: 15,
                     ordering: true,
                     lengthChange: false,
                     oLanguage: {
