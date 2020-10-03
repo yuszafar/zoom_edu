@@ -24,7 +24,7 @@
                         <label for="teacher">Преподаватель</label>
                         <select class="form-control" id="teacher">
                              {% for teacher in teacher_list %}
-                                 <option value="{{ teacher.id }}">{{teacher.first_name}} {{ teacher.last_name }}  {{ teacher.otchestvo }}</option>
+                                 <option value="{{ teacher.id }}">{% if teacher.first_name %}{{teacher.first_name}}{% endif %} {% if teacher.last_name %}{{ teacher.last_name }}{% endif %}  {% if teacher.otchestvo %}{{ teacher.otchestvo }}{% endif %}</option>
                             {% endfor %}
 
                         </select>

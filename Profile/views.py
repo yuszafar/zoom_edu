@@ -25,3 +25,8 @@ class CreatUserView(LoginRequiredMixin, generic.TemplateView):
 class ProfileListView(LoginRequiredMixin, generic.ListView):
     model = Profile
     template_name = 'profile/list.html'
+
+
+class GroupDetailView(LoginRequiredMixin, generic.DetailView):
+    model = StudentGroup
+    template_name = 'profile/group/detail.html'

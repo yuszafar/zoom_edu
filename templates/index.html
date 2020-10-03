@@ -31,7 +31,8 @@
                                     <td>{{ lesson.group.group_name }}</td>
                                     <td>{{ lesson.lesson_info.name }}</td>
                                     <td>{{ lesson.day.isoformat }} {{ lesson.lesson_time.start.isoformat }}</td>
-                                    <td><a href="{{ lesson.zoom_join_url }}">ссылка</a></td>
+                                    {% if request.user.profile == lesson.lesson_info.teacher %}<td><a href="{{ lesson.zoom_join_url }}">ссылка</a></td>
+                                    {% else %}<td><a href="{{ lesson.zoom_join_url }}">ссылка</a></td>{% endif %}
 
                                 </tr>
                             {% endfor %}

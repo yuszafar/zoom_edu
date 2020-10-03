@@ -34,7 +34,7 @@
                                 <tr class="odd gradeX">
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ profile.user.username }}</td>
-                                    <td>{{ profile.last_name }} {{ profile.first_name }} {{ profile.otchestvo }}</td>
+                                    <td>{% if profile.last_name  %}{{ profile.last_name }}{% endif %} {% if profile.first_name %}{{ profile.first_name }}{% endif %} {% if profile.otchestvo %}{{ profile.otchestvo }}{% endif %}</td>
                                     <td>{{ profile.get_level_display }}</td>
 
                                 </tr>

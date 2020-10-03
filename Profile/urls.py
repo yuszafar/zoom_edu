@@ -10,6 +10,7 @@ urlpatterns = [
     path('list/', views.ProfileListView.as_view(), name='list'),
 
     path('group/list/', views.GroupListView.as_view(), name='group_list'),
+    path('group/detail/<int:pk>', views.GroupDetailView.as_view(), name='group_detail'),
     path('group/create/', views.GroupCreateView.as_view(), name='group_create'),
 
 ]

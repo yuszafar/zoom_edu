@@ -1,21 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-    {% if request.user.profile.level == "Training_division" %}
+
     <div class="row">
-        <div class="col-md-12">
-            <div class="right-div">
-                <a class="btn btn-success" href="{% url 'profile:group_create' %}"> <i class="fa fa-plus "></i>Добавить</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    <div class="row">
+
         <div class="col-md-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Дисчеплины
+                    Список пользователей
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -25,17 +18,19 @@
 
                             <tr>
                                 <th class="text-center">№</th>
-                                <th class="text-center">Группа</th>
-                                <th class="text-center">Кол-во</th>
+                                <th class="text-center">Логин</th>
+                                <th class="text-center">ФИО</th>
+                                <th class="text-center">Роль</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for group in studentgroup_list %}
+                            {% for profile in studentgroup.students.all %}
                                 <tr class="odd gradeX">
                                     <td>{{ forloop.counter }}</td>
-                                    <td><a href="{% url 'profile:group_detail' group.id %}">{{ group.group_name }}</a></td>
-                                    <td>{{ group.students.count }}</td>
+                                    <td>{{ profile.user.username }}</td>
+                                    <td>{% if profile.last_name  %}{{ profile.last_name }}{% endif %} {% if profile.first_name %}{{ profile.first_name }}{% endif %} {% if profile.otchestvo %}{{ profile.otchestvo }}{% endif %}</td>
+                                    <td>{{ profile.get_level_display }}</td>
 
                                 </tr>
                             {% endfor %}
@@ -48,6 +43,10 @@
             </div>
             <!--End Advanced Tables -->
         </div>
+
     </div>
+
+
+
 
 {% endblock %}

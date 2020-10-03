@@ -36,7 +36,7 @@
                                 <tr class="odd gradeX">
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ lesson.name }}({{ lesson.type }})</td>
-                                    <td>{{ lesson.teacher.last_name }} {{ lesson.teacher.first_name }} {{ lesson.teacher.otchestvo }}</td>
+                                    <td>{% if  lesson.teacher.last_name %}{{ lesson.teacher.last_name }}{% endif %} {% if  lesson.teacher.first_name %}{{ lesson.teacher.first_name }}{% endif %} {% if  lesson.teacher.otchestvo %}{{ lesson.teacher.otchestvo }}{% endif %}</td>
 
                                 </tr>
                             {% endfor %}
