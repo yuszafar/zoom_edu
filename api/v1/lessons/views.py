@@ -50,7 +50,8 @@ class LessonsCalendarListApiView(generics.ListAPIView):
     def get_queryset(self):
         if self.request.GET.get("day"):
             return Lesson.objects.filter(group=self.kwargs["id"], day=self.request.GET.get("day"))
-
+        if self.request.user.profile.level == "Teacher":
+            Lesson.objects.filter(group=self.kwargs["id"], lesson_info__teacher=self.request.user.profile)
         return Lesson.objects.filter(group=self.kwargs["id"])
 
 
