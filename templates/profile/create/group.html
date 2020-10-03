@@ -19,7 +19,7 @@
                                 <select multiple id="students" class="form-control" size="15">
                                     {% for student in student_list %}
                                         {% if not student.studentgroup_set.count %}
-                                            <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.otchestvo }} {{ student.id }}</option>
+                                            <option value="{{ student.id }}">{% if student.first_name %}{{ student.first_name }}{% endif %} {% if student.last_name %}{{ student.last_name }}{% endif %} {% if student.otchestvo %}{{ student.otchestvo }}{% endif %}</option>
                                         {% endif %}
                                     {% endfor %}
                                 </select>
